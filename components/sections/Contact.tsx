@@ -119,7 +119,7 @@ export function Contact() {
                   What are you training for?
                 </Label>
                 <Select name="goal" defaultValue={GOALS[0]} disabled={sent}>
-                  <SelectTrigger id="goal" className="bg-bg-2 border-line text-fg text-[15px] h-auto py-[15px] rounded-none focus:ring-0 focus:ring-offset-0 focus:border-accent">
+                  <SelectTrigger id="goal" className="w-full bg-bg-2 border-line text-fg text-[15px] h-auto py-[15px] rounded-none focus:ring-0 focus:ring-offset-0 focus:border-accent">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-bg-2 border-line rounded-none">

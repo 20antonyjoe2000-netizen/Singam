@@ -29,10 +29,10 @@ export function Header() {
         scrolled && [
           "border-white/[0.08]",
           "bg-black/[0.82]",
-          "backdrop-blur-[16px]",
           "[backdrop-filter:blur(16px)_saturate(140%)]",
         ]
       )}
+      style={scrolled ? { WebkitBackdropFilter: "blur(16px) saturate(140%)" } : undefined}
     >
       <div className="wrap">
         <nav className="flex items-center justify-between h-[70px]">
