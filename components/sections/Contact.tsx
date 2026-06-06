@@ -33,9 +33,12 @@ export function Contact() {
     e.preventDefault()
     setPending(true)
     const data = new FormData(e.currentTarget)
-    const res = await submitContact(data)
-    setResult(res)
-    setPending(false)
+    try {
+      const res = await submitContact(data)
+      setResult(res)
+    } finally {
+      setPending(false)
+    }
   }
 
   const sent = result?.success === true
@@ -81,10 +84,11 @@ export function Contact() {
             >
               {/* Full name */}
               <div className="flex flex-col gap-[7px]">
-                <Label className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
+                <Label htmlFor="name" className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
                   Full name
                 </Label>
                 <Input
+                  id="name"
                   name="name"
                   placeholder="Your name"
                   required
@@ -95,10 +99,11 @@ export function Contact() {
 
               {/* Email */}
               <div className="flex flex-col gap-[7px]">
-                <Label className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
+                <Label htmlFor="email" className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
                   Email
                 </Label>
                 <Input
+                  id="email"
                   type="email"
                   name="email"
                   placeholder="you@email.com"
@@ -110,11 +115,11 @@ export function Contact() {
 
               {/* Training goal */}
               <div className="flex flex-col gap-[7px]">
-                <Label className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
+                <Label htmlFor="goal" className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
                   What are you training for?
                 </Label>
                 <Select name="goal" defaultValue={GOALS[0]} disabled={sent}>
-                  <SelectTrigger className="bg-bg-2 border-line text-fg text-[15px] h-auto py-[15px] rounded-none focus:ring-0 focus:ring-offset-0 focus:border-accent">
+                  <SelectTrigger id="goal" className="bg-bg-2 border-line text-fg text-[15px] h-auto py-[15px] rounded-none focus:ring-0 focus:ring-offset-0 focus:border-accent">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-bg-2 border-line rounded-none">
@@ -133,10 +138,11 @@ export function Contact() {
 
               {/* Notes */}
               <div className="flex flex-col gap-[7px]">
-                <Label className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
+                <Label htmlFor="msg" className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
                   Anything we should know? (optional)
                 </Label>
                 <Textarea
+                  id="msg"
                   name="msg"
                   rows={3}
                   placeholder="Race date, current weekly volume, injuries…"
@@ -170,7 +176,7 @@ export function Contact() {
                 </p>
               )}
               {result && !result.success && (
-                <p className="text-accent text-[14px] font-bold">
+                <p className="text-red-500 text-[14px] font-bold">
                   {result.error}
                 </p>
               )}
