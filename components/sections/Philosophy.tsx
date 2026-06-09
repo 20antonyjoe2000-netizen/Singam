@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { RevealWrapper } from "@/components/RevealWrapper"
 
 const principles = [
@@ -23,6 +24,12 @@ const principles = [
   },
 ]
 
+const racePhotos = [
+  { src: "/assets/race-kangayam.webp", alt: "Sivabalan flexing at Kangayam Marathon finish" },
+  { src: "/assets/race-delhi.webp", alt: "Sivabalan racing at Vedanta Delhi Half Marathon" },
+  { src: "/assets/race-road.webp", alt: "Sivabalan victory fist at road race" },
+]
+
 export function Philosophy() {
   return (
     <section id="philosophy" className="py-[130px]">
@@ -44,9 +51,32 @@ export function Philosophy() {
           </p>
         </RevealWrapper>
 
-        {/* 2×2 grid — 1px gap achieved via background on parent */}
+        {/* Race photo strip */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 mt-[60px]"
+          className="grid grid-cols-3 mt-[60px]"
+          style={{
+            gap: "1px",
+            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          {racePhotos.map((photo) => (
+            <RevealWrapper key={photo.src} className="relative h-[240px] overflow-hidden bg-bg">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </RevealWrapper>
+          ))}
+        </div>
+
+        {/* 2×2 grid — 1px gap achieved via background on parent */}
+        {/* mt-[-1px] merges top border with photo strip bottom border */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 mt-[-1px]"
           style={{
             gap: "1px",
             background: "rgba(255,255,255,0.08)",
