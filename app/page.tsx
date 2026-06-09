@@ -5,6 +5,7 @@ import { Marquee } from "@/components/sections/Marquee"
 import { About } from "@/components/sections/About"
 import { Philosophy } from "@/components/sections/Philosophy"
 import { Pricing } from "@/components/sections/Pricing"
+import { Events } from "@/components/sections/Events"
 import { Contact } from "@/components/sections/Contact"
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         <Marquee />
         <About />
         <Philosophy />
+        <Events />
         <Pricing />
         <Contact />
       </main>
