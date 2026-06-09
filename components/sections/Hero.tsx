@@ -1,17 +1,21 @@
+import Image from "next/image"
 import Link from "next/link"
 import { RevealWrapper } from "@/components/RevealWrapper"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-end pb-[70px] overflow-hidden">
-      {/* Background media placeholder */}
+    <section className="relative min-h-screen flex flex-col overflow-hidden">
+      {/* Background photo */}
       <div className="absolute inset-0 z-0">
-        <div className="ph-bg h-full flex items-end justify-end p-7">
-          <span className="font-mono text-[11.5px] text-faint uppercase tracking-[0.05em] px-3 py-1.5 border border-dashed border-white/20 bg-black/50">
-            [ Hero film — athlete on the road, hard light, motion blur ]
-          </span>
-        </div>
-        {/* Dual gradient overlay matching prototype */}
+        <Image
+          src="/assets/coach-kolkata.webp"
+          alt="Sivabalan flexing with medal at Tata Steel World 25K Kolkata"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        {/* Dual gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -21,7 +25,11 @@ export function Hero() {
         />
       </div>
 
-      {/* Content */}
+      {/* Nav spacer — prevents content from overlapping fixed header */}
+      <div className="h-[70px] flex-none" />
+
+      {/* Content — fills remaining space, anchored to bottom */}
+      <div className="flex-1 flex flex-col justify-end pb-[70px]">
       <div className="wrap relative z-10 w-full">
         {/* Kick line */}
         <RevealWrapper className="inline-flex items-center gap-3 mb-[22px]">
@@ -35,7 +43,7 @@ export function Hero() {
             className="font-display"
             style={{
               fontSize: "clamp(64px, 12.5vw, 184px)",
-              lineHeight: 0.82,
+              lineHeight: 1.0,
             }}
           >
             Pain is
@@ -76,6 +84,7 @@ export function Hero() {
             Book a free call
           </Link>
         </RevealWrapper>
+      </div>
       </div>
     </section>
   )
