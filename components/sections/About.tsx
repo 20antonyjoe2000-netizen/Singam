@@ -21,10 +21,10 @@ export function About() {
           {/* Photo column */}
           <RevealWrapper className="relative min-h-[560px]">
             <Image
-              src="/assets/singam-academy.webp"
-              alt="Singam Marathon Village, Sivagangai"
+              src="/assets/coach-portrait.png"
+              alt="Sivabalan Elango — Singam Ironman Academy coach"
               fill
-              className="object-cover"
+              className="object-cover object-top"
               sizes="(max-width: 860px) 100vw, 45vw"
               priority={false}
             />
@@ -39,10 +39,10 @@ export function About() {
             {/* Caption */}
             <div className="absolute left-0 bottom-0 px-7 py-6">
               <b className="block font-display text-[30px] uppercase tracking-[0.02em] leading-[0.95]">
-                Singam
+                The Coach
               </b>
               <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-muted">
-                Marathon Village · Sivagangai, TN
+                Singam · Marathon &amp; Ironman
               </span>
             </div>
           </RevealWrapper>
