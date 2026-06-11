@@ -11,9 +11,10 @@ export function Hero() {
           src="/assets/coach-kolkata.webp"
           alt="Sivabalan flexing with medal at Tata Steel World 25K Kolkata"
           fill
-          className="object-cover object-center"
+          className="object-cover object-[81%_39%]"
           priority
           sizes="100vw"
+          data-crop-id="hero"
         />
         {/* Dual gradient overlay */}
         <div

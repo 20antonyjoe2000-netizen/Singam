@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${anton.variable} ${archivo.variable}`}>
+    <html lang="en" className={`${anton.variable} ${archivo.variable}`} suppressHydrationWarning>
       <body className="font-body">{children}</body>
     </html>
   )

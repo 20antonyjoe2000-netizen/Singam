@@ -66,110 +66,134 @@ export function Pricing() {
     >
       <div className="wrap">
 
-        <RevealWrapper className="max-w-[640px]">
-          <p className="eyebrow">Plans &amp; pricing</p>
-          <h2
-            className="font-display mt-[18px]"
-            style={{ fontSize: "clamp(40px, 7vw, 86px)", lineHeight: 0.9 }}
-          >
-            Pick your
-            <br />
-            weapon.
-          </h2>
-          <p className="text-muted text-[18px] mt-[22px] max-w-[560px]">
-            Cancel anytime. Every plan includes the Singam app, weekly
-            check-ins, and race-day strategy.
-          </p>
+        {/* Header: title left, toggle right */}
+        <RevealWrapper>
+          <div className="flex flex-col min-[640px]:flex-row min-[640px]:items-end justify-between gap-6 mb-[52px]">
+            <div>
+              <p className="eyebrow">Plans &amp; pricing</p>
+              <h2
+                className="font-display mt-[18px]"
+                style={{ fontSize: "clamp(40px, 7vw, 86px)", lineHeight: 0.9 }}
+              >
+                Pick your
+                <br />
+                weapon.
+              </h2>
+              <p className="text-muted text-[18px] mt-[22px] max-w-[480px]">
+                Cancel anytime. Every plan includes the Singam app, weekly
+                check-ins, and race-day strategy.
+              </p>
+            </div>
 
-          {/* Billing toggle */}
-          <div
-            className="inline-flex items-center mt-[30px] border-2 border-line p-1 bg-bg"
-            role="tablist"
-            aria-label="Billing period"
-          >
-            {(["monthly", "annual"] as Cycle[]).map((c) => (
+            {/* Billing toggle */}
+            <div
+              className="inline-flex items-center border-2 border-line p-1 bg-bg self-start min-[640px]:self-end flex-none"
+              role="tablist"
+              aria-label="Billing period"
+            >
               <button
-                key={c}
                 role="tab"
-                aria-selected={cycle === c}
-                onClick={() => setCycle(c)}
+                aria-selected={cycle === "monthly"}
+                onClick={() => setCycle("monthly")}
                 className={cn(
                   "font-body text-[13px] font-extrabold uppercase tracking-[0.08em]",
-                  "px-6 py-[11px] border-none cursor-pointer transition-all duration-200",
-                  cycle === c
+                  "px-5 py-[10px] cursor-pointer transition-all duration-200",
+                  cycle === "monthly"
                     ? "bg-accent text-ink"
                     : "bg-transparent text-muted hover:text-fg"
                 )}
               >
-                {c.charAt(0).toUpperCase() + c.slice(1)}
+                Monthly
               </button>
-            ))}
-            <span className="text-[12px] font-extrabold uppercase tracking-[0.06em] text-accent ml-[14px] pr-1">
-              Save 20%
-            </span>
+              <button
+                role="tab"
+                aria-selected={cycle === "annual"}
+                onClick={() => setCycle("annual")}
+                className={cn(
+                  "font-body text-[13px] font-extrabold uppercase tracking-[0.08em]",
+                  "px-5 py-[10px] cursor-pointer transition-all duration-200 flex items-center gap-[8px]",
+                  cycle === "annual"
+                    ? "bg-accent text-ink"
+                    : "bg-transparent text-muted hover:text-fg"
+                )}
+              >
+                Annual
+                <span
+                  className={cn(
+                    "text-[11px] font-extrabold tracking-[0.06em]",
+                    cycle === "annual" ? "text-ink/80" : "text-accent"
+                  )}
+                >
+                  SAVE 20%
+                </span>
+              </button>
+            </div>
           </div>
         </RevealWrapper>
 
-        {/* Plans grid — 1px gap via parent background */}
-        <div
-          className="grid grid-cols-1 min-[860px]:grid-cols-3 mt-[48px]"
-          style={{
-            gap: "1px",
-            background: "rgba(255,255,255,0.08)",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
+        {/* Plans grid */}
+        <div className="grid grid-cols-1 min-[860px]:grid-cols-3 gap-[3px] bg-white/[0.06]">
           {plans.map((plan, i) => (
             <RevealWrapper
               key={plan.tag}
               delay={i * 70}
-              className="relative bg-bg hover:bg-bg-2 transition-colors duration-300 flex flex-col"
+              className="flex flex-col"
             >
-              {/* "MOST POPULAR" banner on featured plan */}
-              {plan.featured && (
-                <div className="absolute top-0 left-0 right-0 bg-accent text-ink text-[11px] font-extrabold tracking-[0.14em] text-center py-2">
+              {/* Top banner row — keeps all cards vertically aligned */}
+              {plan.featured ? (
+                <div className="bg-accent text-ink text-[11px] font-extrabold tracking-[0.14em] text-center py-[8px]">
                   MOST POPULAR
                 </div>
+              ) : (
+                <div className="py-[8px] text-[11px] bg-bg invisible select-none">&nbsp;</div>
               )}
 
               <div
                 className={cn(
-                  "flex flex-col flex-1 p-[42px_34px]",
-                  plan.featured && "pt-[62px]"
+                  "flex flex-col flex-1 p-[38px_32px] bg-bg",
+                  plan.featured
+                    ? "border-x-2 border-b-2 border-accent"
+                    : "border border-transparent"
                 )}
               >
+                {/* Plan name */}
                 <div
                   className={cn(
-                    "text-[13px] font-extrabold uppercase tracking-[0.1em]",
-                    plan.featured ? "text-accent" : "text-muted"
+                    "font-display text-[26px] uppercase leading-none mb-[16px]",
+                    plan.featured ? "text-accent" : "text-fg"
                   )}
                 >
                   {plan.tag}
                 </div>
 
+                {/* Price */}
                 <div
-                  className="font-display mt-[20px] mb-1 flex items-baseline gap-2"
-                  style={{ fontSize: 66, lineHeight: 0.9 }}
+                  className="font-display flex items-baseline gap-[6px] mb-[8px]"
+                  style={{ fontSize: 68, lineHeight: 0.9 }}
                 >
                   <span>${cycle === "monthly" ? plan.monthly : plan.annual}</span>
-                  <small className="font-body text-[15px] text-faint font-semibold">
-                    /MO
-                  </small>
+                  <small className="font-body text-[15px] text-faint font-semibold">/MO</small>
                 </div>
 
-                <p className="text-[14.5px] text-muted mb-[26px] min-h-[42px]">
+                <p className="text-[14.5px] text-muted mb-[26px] min-h-[44px]">
                   {plan.desc}
                 </p>
 
-                <ul className="flex flex-col gap-[13px] mb-[30px] flex-1 list-none">
+                <ul className="flex flex-col gap-[13px] mb-[32px] flex-1 list-none">
                   {plan.features.map((feat) => (
                     <li
                       key={feat}
-                      className="text-[14.5px] text-fg flex gap-[11px] items-start font-medium"
+                      className="text-[14.5px] text-fg flex gap-[10px] items-start font-medium"
                     >
-                      <span className="text-accent font-extrabold flex-none leading-[1.5]">
-                        ✓
-                      </span>
+                      {plan.featured ? (
+                        <span className="flex-none w-[18px] h-[18px] rounded-full bg-accent text-ink text-[10px] font-extrabold flex items-center justify-center mt-[2px] shrink-0">
+                          ✓
+                        </span>
+                      ) : (
+                        <span className="text-accent font-extrabold flex-none leading-[1.5] shrink-0">
+                          ✓
+                        </span>
+                      )}
                       {feat}
                     </li>
                   ))}
@@ -180,7 +204,7 @@ export function Pricing() {
                   className={cn(
                     "w-full inline-flex items-center justify-center",
                     "text-[13px] font-extrabold uppercase tracking-[0.08em]",
-                    "px-[26px] py-[13px] border-2",
+                    "px-[26px] py-[14px] border-2",
                     "transition-all duration-200 hover:-translate-y-0.5",
                     plan.featured
                       ? "bg-accent text-ink border-transparent hover:bg-fg hover:text-black"

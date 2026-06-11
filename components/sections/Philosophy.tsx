@@ -25,9 +25,9 @@ const principles = [
 ]
 
 const racePhotos = [
-  { src: "/assets/race-kangayam.webp", alt: "Sivabalan flexing at Kangayam Marathon finish" },
-  { src: "/assets/race-delhi.webp", alt: "Sivabalan racing at Vedanta Delhi Half Marathon" },
-  { src: "/assets/race-road.webp", alt: "Sivabalan victory fist at road race" },
+  { src: "/assets/race-kangayam.webp", alt: "Sivabalan flexing at Kangayam Marathon finish", crop: "50% 63%" },
+  { src: "/assets/race-delhi.webp", alt: "Sivabalan racing at Vedanta Delhi Half Marathon", crop: "50% 0%" },
+  { src: "/assets/race-road.webp", alt: "Sivabalan victory fist at road race", crop: "47% 46%" },
 ]
 
 export function Philosophy() {
@@ -60,14 +60,16 @@ export function Philosophy() {
             border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
-          {racePhotos.map((photo) => (
-            <RevealWrapper key={photo.src} className="relative h-[240px] overflow-hidden bg-bg">
+          {racePhotos.map((photo, i) => (
+            <RevealWrapper key={photo.src} className="relative h-[240px] md:h-[320px] overflow-hidden bg-bg">
               <Image
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: photo.crop }}
                 sizes="(max-width: 640px) 100vw, 33vw"
+                data-crop-id={`approach-${i}`}
               />
             </RevealWrapper>
           ))}
