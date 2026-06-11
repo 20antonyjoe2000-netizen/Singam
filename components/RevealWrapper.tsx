@@ -7,10 +7,12 @@ export function RevealWrapper({
   children,
   className,
   delay = 0,
+  style,
 }: {
   children: React.ReactNode
   className?: string
   delay?: number
+  style?: React.CSSProperties
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [revealed, setRevealed] = useState(true)
@@ -48,7 +50,7 @@ export function RevealWrapper({
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
       className={cn(
         "transition-[opacity,transform] duration-700 ease-[cubic-bezier(.22,.61,.36,1)]",
         "motion-reduce:transition-none motion-reduce:translate-y-0 motion-reduce:opacity-100",
