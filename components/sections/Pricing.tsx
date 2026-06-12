@@ -10,8 +10,8 @@ type Cycle = "monthly" | "annual"
 const plans = [
   {
     tag: "Self-Guided",
-    monthly: 49,
-    annual: 39,
+    monthly: 999,
+    annual: 799,
     desc: "Periodized plans you run on your own schedule.",
     features: [
       "Adaptive marathon & Ironman plans",
@@ -25,8 +25,8 @@ const plans = [
   },
   {
     tag: "1-on-1 Coaching",
-    monthly: 199,
-    annual: 159,
+    monthly: 2999,
+    annual: 2399,
     desc: "A fully personal plan, rebuilt weekly around your data.",
     features: [
       "Everything in Self-Guided",
@@ -41,8 +41,8 @@ const plans = [
   },
   {
     tag: "Squad",
-    monthly: 89,
-    annual: 71,
+    monthly: 4999,
+    annual: 3999,
     desc: "Train with a small group chasing the same line.",
     features: [
       "Shared squad training block",
@@ -171,7 +171,7 @@ export function Pricing() {
                   className="font-display flex items-baseline gap-[6px] mb-[8px]"
                   style={{ fontSize: 68, lineHeight: 0.9 }}
                 >
-                  <span>${cycle === "monthly" ? plan.monthly : plan.annual}</span>
+                  <span>₹{cycle === "monthly" ? plan.monthly : plan.annual}</span>
                   <small className="font-body text-[15px] text-faint font-semibold">/MO</small>
                 </div>
 

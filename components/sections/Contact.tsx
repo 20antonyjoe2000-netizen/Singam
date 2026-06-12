@@ -73,6 +73,26 @@ export function Contact() {
                 </span>
               ))}
             </div>
+
+            {/* Academy map */}
+            <div className="mt-8 border border-line overflow-hidden" style={{ height: 220 }}>
+              <iframe
+                title="Singam Academy Location"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=78.47797%2C9.79388%2C78.48797%2C9.80388&layer=mapnik&marker=9.79888%2C78.48297"
+                width="100%"
+                height="100%"
+                style={{ border: 0, display: "block", filter: "invert(0.9) hue-rotate(180deg)" }}
+                loading="lazy"
+              />
+            </div>
+            <a
+              href="https://www.openstreetmap.org/?mlat=9.79888&mlon=78.48297#map=16/9.79888/78.48297"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-2 text-[11px] font-bold uppercase tracking-[0.06em] text-faint hover:text-accent transition-colors"
+            >
+              Open in maps ↗
+            </a>
           </RevealWrapper>
 
           {/* Form */}
