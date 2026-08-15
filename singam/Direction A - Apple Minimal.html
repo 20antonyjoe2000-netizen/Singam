@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Singam Ironman Academy — Direction A</title>
+<style>
+  :root{
+    --bg:#08080a;
+    --bg-2:#0e0e11;
+    --panel:#131318;
+    --line:rgba(255,255,255,.10);
+    --line-2:rgba(255,255,255,.06);
+    --fg:#f4f4f6;
+    --muted:#9b9ba3;
+    --faint:#6c6c74;
+    --accent:oklch(0.81 0.13 76);     /* molten gold */
+    --accent-ink:#1a1304;
+    --r:18px;
+    --maxw:1200px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    letter-spacing:-0.01em;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+  }
+  .accent{color:var(--accent)}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:background .4s var(--ease),border-color .4s var(--ease),backdrop-filter .4s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(8,8,10,.72);
+    backdrop-filter:saturate(160%) blur(20px);
+    -webkit-backdrop-filter:saturate(160%) blur(20px);
+    border-bottom:1px solid var(--line-2);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600;letter-spacing:-.02em}
+  .mark{
+    width:26px;height:26px;border-radius:7px;
+    background:var(--accent);
+    display:grid;place-items:center;color:var(--accent-ink);
+    font-weight:800;font-size:15px;
+  }
+  .brand b{font-weight:600}
+  .brand span{color:var(--faint);font-weight:500}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--fg)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-size:14px;font-weight:600;border-radius:999px;
+    padding:10px 20px;cursor:pointer;border:1px solid transparent;
+    transition:transform .25s var(--ease),background .25s,border-color .25s,color .25s;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--accent);color:var(--accent-ink)}
+  .btn-primary:hover{transform:translateY(-1px);background:oklch(0.86 0.13 78)}
+  .btn-ghost{border-color:var(--line);color:var(--fg)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.4);transform:translateY(-1px)}
+  .btn-lg{padding:15px 30px;font-size:15px}
+  @media(max-width:820px){.nav-links{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:188px 0 96px;text-align:center}
+  .hero-media{
+    position:absolute;inset:0;z-index:0;overflow:hidden;
+  }
+  .hero-media .ph{height:100%;border-radius:0;border:none;place-items:end start;padding:0 0 120px 24px}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 0%,transparent 30%,var(--bg) 78%),
+      linear-gradient(180deg,rgba(8,8,10,.35),rgba(8,8,10,.2) 40%,var(--bg));
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero h1{
+    font-size:clamp(48px,8vw,104px);
+    line-height:.96;letter-spacing:-.04em;font-weight:700;
+    margin:22px 0 0;
+  }
+  .hero h1 .line2{color:var(--muted)}
+  .hero p.lede{
+    max-width:620px;margin:26px auto 0;
+    font-size:clamp(17px,2vw,21px);color:var(--muted);letter-spacing:-.01em;
+  }
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+  .hero-stats{
+    display:flex;gap:0;justify-content:center;margin-top:84px;
+    border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);
+  }
+  .hero-stats .stat{padding:26px 44px;border-right:1px solid var(--line-2)}
+  .hero-stats .stat:last-child{border-right:none}
+  .hero-stats .num{font-size:34px;font-weight:700;letter-spacing:-.03em}
+  .hero-stats .lbl{font-size:12.5px;color:var(--faint);letter-spacing:.04em;margin-top:4px}
+  @media(max-width:640px){
+    .hero-stats{flex-wrap:wrap}
+    .hero-stats .stat{flex:1 1 50%;border-bottom:1px solid var(--line-2)}
+    .hero-stats .stat:nth-child(even){border-right:none}
+  }
+
+  /* ---------- PLACEHOLDER ---------- */
+  .ph{
+    position:relative;border-radius:var(--r);overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg,rgba(255,255,255,.022) 0 12px,transparent 12px 24px),
+      var(--bg-2);
+    border:1px solid var(--line-2);
+    display:grid;place-items:center;
+  }
+  .ph .tag{
+    font-family:ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:11.5px;color:var(--faint);letter-spacing:.05em;
+    text-transform:uppercase;padding:7px 12px;border:1px dashed var(--line);
+    border-radius:7px;background:rgba(8,8,10,.5);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative}
+  .band{padding:120px 0}
+  .sec-head{max-width:680px}
+  .sec-head h2{
+    font-size:clamp(32px,4.4vw,52px);line-height:1.02;letter-spacing:-.035em;
+    font-weight:700;margin:16px 0 0;
+  }
+  .sec-head p{color:var(--muted);font-size:18px;margin-top:18px;max-width:560px}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;margin-top:64px}
+  .about-portrait{aspect-ratio:4/5}
+  .about-copy h3{font-size:26px;letter-spacing:-.02em;font-weight:600;margin-bottom:14px}
+  .about-copy p{color:var(--muted);font-size:17px;margin-bottom:16px}
+  .creds{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .chip{
+    font-size:13px;color:var(--fg);padding:8px 14px;border-radius:999px;
+    border:1px solid var(--line);background:var(--bg-2);
+  }
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:36px}}
+
+  /* ---------- PHILOSOPHY ---------- */
+  .philo{background:var(--bg-2);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:60px}
+  .pcard{padding:32px 26px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg);transition:transform .4s var(--ease),border-color .4s}
+  .pcard:hover{transform:translateY(-4px);border-color:var(--line)}
+  .pnum{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--accent);letter-spacing:.05em}
+  .pcard h4{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:18px 0 10px}
+  .pcard p{font-size:14.5px;color:var(--muted)}
+  @media(max-width:900px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.pgrid{grid-template-columns:1fr}}
+
+  /* ---------- PRICING ---------- */
+  .toggle{
+    display:inline-flex;align-items:center;gap:0;margin-top:30px;
+    border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--bg-2);
+  }
+  .toggle button{
+    border:none;background:transparent;color:var(--muted);cursor:pointer;
+    font-size:13.5px;font-weight:600;padding:9px 20px;border-radius:999px;transition:.25s;font-family:inherit;
+  }
+  .toggle button.active{background:var(--fg);color:#0a0a0a}
+  .save{font-size:12px;color:var(--accent);margin-left:12px;font-weight:600}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .plan{
+    border:1px solid var(--line-2);border-radius:22px;padding:34px 30px;background:var(--bg-2);
+    display:flex;flex-direction:column;transition:transform .4s var(--ease),border-color .4s;
+  }
+  .plan:hover{transform:translateY(-5px);border-color:var(--line)}
+  .plan.featured{border-color:var(--accent);background:linear-gradient(180deg,rgba(232,176,75,.07),var(--bg-2) 60%)}
+  .plan .ptag{font-size:13px;font-weight:600;color:var(--muted)}
+  .plan.featured .ptag{color:var(--accent)}
+  .plan .price{font-size:46px;font-weight:700;letter-spacing:-.03em;margin:18px 0 2px;display:flex;align-items:baseline;gap:6px}
+  .plan .price small{font-size:15px;color:var(--faint);font-weight:500;letter-spacing:0}
+  .plan .pdesc{font-size:14.5px;color:var(--muted);margin-bottom:24px;min-height:42px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:30px;flex:1}
+  .plan li{font-size:14.5px;color:var(--fg);display:flex;gap:11px;align-items:flex-start}
+  .plan li .tick{color:var(--accent);flex:none;margin-top:1px}
+  .plan .btn{width:100%}
+  @media(max-width:900px){.plans{grid-template-columns:1fr}}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--bg-2);border-top:1px solid var(--line-2)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .form{display:grid;gap:14px}
+  .field{display:grid;gap:7px}
+  .field label{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+  .field input,.field select,.field textarea{
+    background:var(--bg);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;color:var(--fg);font-family:inherit;font-size:15px;transition:border-color .2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+  .form .btn{margin-top:6px}
+  .form-note{font-size:13px;color:var(--faint);margin-top:4px}
+  .success{display:none;color:var(--accent);font-size:14.5px;margin-top:6px}
+  @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:60px 0 50px;border-top:1px solid var(--line-2)}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .foot .muted{color:var(--faint);font-size:13px}
+  .foot-links{display:flex;gap:26px}
+  .foot-links a{font-size:13.5px;color:var(--muted);transition:color .2s}
+  .foot-links a:hover{color:var(--fg)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.pre{opacity:0;transform:translateY(26px)}
+  @media(prefers-reduced-motion:reduce){.reveal,.reveal.pre{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top">
+        <span class="mark">S</span>
+        <b>SINGAM</b><span>Ironman Academy</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">Coach</a>
+        <a href="#philosophy">Approach</a>
+        <a href="#pricing">Plans</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#pricing" class="btn btn-primary">Start training</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media">
+      <div class="ph"><span class="tag">[ Hero film — coach running at dawn, slow motion ]</span></div>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow reveal">Marathon &amp; Ironman Coaching</p>
+      <h1 class="reveal">Built to go<br /><span class="line2">the distance.</span></h1>
+      <p class="lede reveal">Personalized coaching for marathon and Ironman — engineered around your body, your schedule, and the race you're chasing.</p>
+      <div class="cta-row reveal">
+        <a href="#pricing" class="btn btn-primary btn-lg">Explore plans</a>
+        <a href="#contact" class="btn btn-ghost btn-lg">Book a free call</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="stat"><div class="num">1,200<span class="accent">+</span></div><div class="lbl">ATHLETES COACHED</div></div>
+        <div class="stat"><div class="num">340</div><div class="lbl">IRONMAN FINISHES</div></div>
+        <div class="stat"><div class="num">96<span class="accent">%</span></div><div class="lbl">REACHED RACE GOAL</div></div>
+        <div class="stat"><div class="num">14</div><div class="lbl">YEARS COACHING</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="band">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="ph about-portrait reveal"><span class="tag">[ Coach portrait — studio, 4:5 ]</span></div>
+        <div class="about-copy reveal">
+          <p class="eyebrow">Meet your coach</p>
+          <h2 class="sec-head" style="font-size:clamp(30px,4vw,46px);margin-top:14px">A lion's patience.<br />A finisher's discipline.</h2>
+          <p style="margin-top:22px">Singam was built on a simple belief: endurance isn't about training harder than everyone else — it's about training smarter, longer, and with a plan that actually fits your life.</p>
+          <p>Over fourteen years, Coach Arjun "Singam" Raman has guided beginners across their first finish line and elite athletes to Boston and Kona qualification. Every plan is hand-built, reviewed weekly, and adapted to the data your body sends back.</p>
+          <div class="creds">
+            <span class="chip">IRONMAN Certified Coach</span>
+            <span class="chip">5× Kona finisher</span>
+            <span class="chip">UESCA Endurance</span>
+            <span class="chip">Sub-2:40 marathoner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy" class="band philo">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">The approach</p>
+        <h2>Train smart. Recover hard. Show up every day.</h2>
+        <p>Four principles shape every plan we write — whether it's your first 5K build or a sub-10 Ironman.</p>
+      </div>
+      <div class="pgrid">
+        <div class="pcard reveal"><div class="pnum">01</div><h4>Built around your life</h4><p>Plans flex to your schedule, not the other way around. Real progress on the hours you actually have.</p></div>
+        <div class="pcard reveal"><div class="pnum">02</div><h4>Recovery is training</h4><p>We program rest as deliberately as intervals. Adaptation happens when you stop, not when you grind.</p></div>
+        <div class="pcard reveal"><div class="pnum">03</div><h4>Data-informed, human-led</h4><p>We read the numbers, then talk like people. Heart rate and power guide it; judgement drives it.</p></div>
+        <div class="pcard reveal"><div class="pnum">04</div><h4>Consistency compounds</h4><p>No hero weeks, no burnout. Small, repeatable sessions stacked over months win the start line.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="band">
+    <div class="wrap">
+      <div class="sec-head reveal" style="max-width:640px">
+        <p class="eyebrow">Plans &amp; pricing</p>
+        <h2>Choose how you want to be coached.</h2>
+        <p>Cancel anytime. Every plan includes the Singam training app, weekly check-ins, and race-day strategy.</p>
+        <div class="toggle" role="tablist" aria-label="Billing period">
+          <button class="active" data-cycle="monthly">Monthly</button>
+          <button data-cycle="annual">Annual</button>
+          <span class="save">Save 20%</span>
+        </div>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <div class="ptag">Self-Guided</div>
+          <div class="price"><span data-m="49" data-a="39">$49</span><small>/ mo</small></div>
+          <p class="pdesc">Structured, periodized plans you run on your own schedule.</p>
+          <ul>
+            <li><span class="tick">✓</span>Adaptive marathon &amp; Ironman plans</li>
+            <li><span class="tick">✓</span>Singam training app + analytics</li>
+            <li><span class="tick">✓</span>Pacing &amp; race-day strategy guide</li>
+            <li><span class="tick">✓</span>Strength &amp; mobility library</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Get started</a>
+        </div>
+        <div class="plan featured reveal">
+          <div class="ptag">1-on-1 Coaching · Most popular</div>
+          <div class="price"><span data-m="199" data-a="159">$199</span><small>/ mo</small></div>
+          <p class="pdesc">A fully personal plan, rebuilt weekly around your data and life.</p>
+          <ul>
+            <li><span class="tick">✓</span>Everything in Self-Guided</li>
+            <li><span class="tick">✓</span>Custom plan, adjusted weekly</li>
+            <li><span class="tick">✓</span>Direct chat with your coach</li>
+            <li><span class="tick">✓</span>Monthly video review call</li>
+            <li><span class="tick">✓</span>Nutrition &amp; race-week planning</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Start 1-on-1</a>
+        </div>
+        <div class="plan reveal">
+          <div class="ptag">Squad</div>
+          <div class="price"><span data-m="89" data-a="71">$89</span><small>/ mo</small></div>
+          <p class="pdesc">Train with a small group chasing the same start line.</p>
+          <ul>
+            <li><span class="tick">✓</span>Shared squad training block</li>
+            <li><span class="tick">✓</span>Weekly group coaching call</li>
+            <li><span class="tick">✓</span>Private squad community</li>
+            <li><span class="tick">✓</span>Accountability &amp; leaderboards</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Join a squad</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="band contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Start the conversation</p>
+          <h2 class="sec-head" style="font-size:clamp(30px,4vw,46px);margin-top:14px">Let's find your<br />finish line.</h2>
+          <p style="color:var(--muted);font-size:17px;margin-top:20px;max-width:420px">Tell us your race and your timeline. We'll send a free plan recommendation and book a 20-minute call — no pressure.</p>
+          <div class="creds" style="margin-top:30px">
+            <span class="chip">hello@singamacademy.com</span>
+            <span class="chip">Remote · worldwide</span>
+          </div>
+        </div>
+        <form class="form reveal" id="contactForm" novalidate>
+          <div class="field">
+            <label>Full name</label>
+            <input type="text" name="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@email.com" required />
+          </div>
+          <div class="field">
+            <label>What are you training for?</label>
+            <select name="goal">
+              <option>First marathon</option>
+              <option>Marathon PR / Boston qualifier</option>
+              <option>First Ironman / 70.3</option>
+              <option>Ironman PR / Kona qualifier</option>
+              <option>Getting back into endurance</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Anything we should know? (optional)</label>
+            <textarea name="msg" rows="3" placeholder="Race date, current weekly volume, injuries…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Send &amp; book my call</button>
+          <p class="form-note">We reply within one business day.</p>
+          <p class="success" id="formSuccess">✓ Thanks — your request is in. Check your inbox shortly.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top"><span class="mark">S</span><b>SINGAM</b><span>Ironman Academy</span></a>
+    <div class="foot-links">
+      <a href="#about">Coach</a>
+      <a href="#philosophy">Approach</a>
+      <a href="#pricing">Plans</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="muted">© 2026 Singam Ironman Academy</p>
+  </div>
+</footer>
+
+<script>
+  // sticky nav
+  const hdr=document.getElementById('hdr');
+  const onScroll=()=>hdr.classList.toggle('scrolled',window.scrollY>20);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // reveal — visible by default; only hide & animate below-the-fold elements
+  (function(){
+    const els=[].slice.call(document.querySelectorAll('.reveal'));
+    if(!('IntersectionObserver' in window))return;
+    const vh=window.innerHeight;
+    const io=new IntersectionObserver((es,obs)=>{
+      es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');obs.unobserve(e.target);}});
+    },{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+    els.forEach((el,i)=>{
+      if(el.getBoundingClientRect().top>vh*0.92){
+        el.classList.add('pre');
+        el.style.transitionDelay=(Math.min(i%6,5)*60)+'ms';
+        io.observe(el);
+      }
+    });
+    // failsafe: never leave content hidden
+    setTimeout(()=>els.forEach(el=>el.classList.remove('pre')),2500);
+  })();
+
+  // pricing toggle
+  const cycleBtns=document.querySelectorAll('.toggle button');
+  const prices=document.querySelectorAll('.price span[data-m]');
+  cycleBtns.forEach(b=>b.addEventListener('click',()=>{
+    cycleBtns.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const annual=b.dataset.cycle==='annual';
+    prices.forEach(p=>{
+      const v=annual?p.dataset.a:p.dataset.m;
+      p.textContent='$'+v;
+    });
+  }));
+
+  // form
+  const form=document.getElementById('contactForm');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    document.getElementById('formSuccess').style.display='block';
+    form.querySelector('button[type=submit]').textContent='Sent ✓';
+  });
+</script>
+</body>
+</html>

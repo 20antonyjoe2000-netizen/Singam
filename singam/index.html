@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Singam Ironman Academy — Homepage Directions</title>
+<style>
+  :root{--bg:#0a0a0b;--fg:#f4f4f6;--muted:#9b9ba3;--line:rgba(255,255,255,.1);--accent:oklch(0.78 0.16 55)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding:7vh 32px 8vh}
+  .head{max-width:760px;margin:0 auto 56px;text-align:center}
+  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .head h1{font-size:clamp(32px,5vw,52px);letter-spacing:-.035em;font-weight:700;margin:16px 0 14px;line-height:1.02}
+  .head p{color:var(--muted);font-size:17px}
+  .grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#0e0e11;transition:transform .35s cubic-bezier(.22,.61,.36,1),border-color .35s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.28)}
+  .thumb{aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .thumb iframe{position:absolute;top:0;left:0;width:1440px;height:900px;transform:scale(.4375);transform-origin:top left;border:0;pointer-events:none}
+  .meta{padding:24px 26px 28px}
+  .meta .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .meta h2{font-size:24px;letter-spacing:-.02em;margin:9px 0 8px;font-weight:700}
+  .meta p{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+  .meta a{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--fg);border:1px solid var(--line);padding:11px 20px;border-radius:999px;transition:.2s}
+  .meta a:hover{background:var(--fg);color:#0a0a0a}
+  .foot{text-align:center;color:#6c6c74;font-size:13px;margin-top:56px}
+</style>
+</head>
+<body>
+  <div class="head">
+    <p class="eyebrow">Singam Ironman Academy</p>
+    <h1>Two homepage directions</h1>
+    <p>Same brand, same content — two distinct moods. Open each full-screen, then tell me which one to push further (or mix the best of both).</p>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="thumb"><iframe src="Direction A - Apple Minimal.html" scrolling="no" tabindex="-1"></iframe></div>
+      <div class="meta">
+        <p class="k">Direction A</p>
+        <h2>Apple Minimal</h2>
+        <p>Calm, premium, generous whitespace. Refined type, warm gold accent, quiet confidence.</p>
+        <a href="Direction A - Apple Minimal.html">Open full site →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="thumb"><iframe src="Direction B - Nike Bold.html" scrolling="no" tabindex="-1"></iframe></div>
+      <div class="meta">
+        <p class="k">Direction B</p>
+        <h2>Nike Bold</h2>
+        <p>High-energy and athletic. Condensed poster headlines, pure black, hot-orange accent, motion.</p>
+        <a href="Direction B - Nike Bold.html">Open full site →</a>
+      </div>
+    </div>
+  </div>
+  <p class="foot">Placeholders mark where your own race photography will go.</p>
+</body>
+</html>
